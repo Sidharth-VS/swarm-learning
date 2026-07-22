@@ -22,7 +22,7 @@ This example shows the Swarm training of a Fashion-MNIST classifier using two Ma
 The cluster setup for this example uses only one host, as shown in the figure below:
 - host-1: 172.1.1.1
 
-|<img width="1372" height="771" alt="Fashion-MNIST-cluster-setup" src="https://github.com/user-attachments/assets/0f5846e0-41b1-4f5f-b78d-0e634fd4c142"/>|
+|<img width="1372" height="771" alt="Fashion-MNIST-cluster-setup" src="https://github.com/user-attachments/assets/00cebdcc-2d3f-416a-af15-67eb87fa7ef5"/>|
 |:--:|
 |<b>Figure 1: Cluster setup for the Cascaded DP Fashion MNIST example</b>|
 
