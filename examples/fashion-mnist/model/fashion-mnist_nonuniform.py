@@ -330,17 +330,17 @@ def main():
         print(f"***** partition_mode=iid | node={nodeId}")
         print(f"***** Dynamic Node Weight Assignment: Node {nodeId} Weightage = {nodeWeightage}%")
         print(f"***** partition_mode=iid | node={nodeId} | samples={len(x_train)}")
-        for c in range(10):
-            count = int(np.sum(y_train == c))
+        for class_index in range(10):
+            count = int(np.sum(y_train == class_index))
             if count > 0:
-                print(f"      Class {c:2d}: {count:5d}")
+                print(f"      Class {class_index:2d}: {count:5d}")
     else:
         # Non-IID Dirichlet distribution strategy mapping for heterogeneous data setups
         partitionMode = 'non_iid'
         alpha = float(alpha_env)
         node_idx = [[] for _ in range(numNodes)]
-        for c in range(10):
-            idx = np.where(y_train == c)[0]
+        for class_index in range(10):
+            idx = np.where(y_train == class_index)[0]
             rng.shuffle(idx)
             proportions = rng.dirichlet(alpha=np.full(numNodes, alpha))
             splits = (proportions * len(idx)).astype(int)
@@ -363,10 +363,10 @@ def main():
         print(f"***** partition_mode=dirichlet (Dirichlet alpha={alpha_env}) | node={nodeId}")
         print(f"***** Dynamic Node Weight Assignment: Node {nodeId} Weightage = {nodeWeightage}%")
         print(f"***** partition_mode=dirichlet | node={nodeId} | samples={len(x_train)}")
-        for c in range(10):
-            count = int(np.sum(y_train == c))
+        for class_index in range(10):
+            count = int(np.sum(y_train == class_index))
             if count > 0:
-                print(f"      Class {c:2d}: {count:5d}")
+                print(f"      Class {class_index:2d}: {count:5d}")
 
     x_train, x_test = x_train / 255.0, x_test / 255.0   # Scale pixels directly to the [0, 1] range
     num_train_samples = len(x_train)
