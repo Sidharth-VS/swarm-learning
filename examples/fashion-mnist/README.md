@@ -11,7 +11,7 @@ To simulate realistic, real-world conditions, the training data can be distribut
 |<b>Figure 1: Cascaded DP Architecture Flowchart for the Fashion-MNIST Swarm Learning Example</b>|
 
 The ML program is in `workspace/fashion-mnist/model` and is called `fashion-mnist_nonuniform.py`.
-See the [`result/`](./result) folder for accuracy and runtime benchmarks.
+See the [`result.md/`](./result/results.md) folder for accuracy and runtime benchmarks.
 
 **Stack:** TensorFlow · TensorFlow Privacy · HPE Swarm Learning
 
@@ -41,7 +41,7 @@ fashion-mnist/
 │   └── requirements.txt
 ├── model/
 │   └── fashion-mnist_nonuniform.py
-├── results/
+├── result/
 │   ├── Accuracy_Bar.png
 │   ├── Runtime_Bar.png
 │   └── results.md
