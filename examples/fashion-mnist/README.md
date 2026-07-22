@@ -1,8 +1,17 @@
 # Fashion-MNIST: CascadedDP with Non-Uniform Partitioning
 
-This example trains a Fashion-MNIST classifier across a two ML node (both run on the VM/Physical machine) HPE Swarm Learning setup using CascadedDP: training begins with Differential Privacy (DP) active, and DP is automatically dropped once convergence is detected via a decentralized weight parameter consensus protocol. Data is partitioned using a Dirichlet distribution to simulate non-IID heterogeneity. The model is a standard small CNN (matching the TF Privacy / Opacus canonical DP-SGD benchmark architecture for MNIST/Fashion-MNIST), not a plain MLP.
+This example trains a Fashion-MNIST classifier across a Two-ML-Node (both run on the same VM/Physical machine) HPE Swarm Learning setup using CascadedDP: training begins with Differential Privacy (DP) active, and DP is automatically dropped once convergence is detected via a decentralized weight parameter consensus protocol.The model is a standard small CNN (matching the TF Privacy / Opacus canonical DP-SGD benchmark architecture for MNIST/Fashion-MNIST), not a plain MLP.
+
+To protect data privacy, the training process uses Differential Privacy (DP). This method introduces controlled noise into the learning process so that sensitive details of the underlying data cannot be inferred from the trained model. However, maintaining DP throughout the entire training process can reduce model accuracy and slow convergence. To address this, the project uses a technique called CascadedDP. Training begins with DP enabled, and DP is automatically disabled once the model reaches a stable state. This stable state is detected using a decentralized consensus protocol, in which the two nodes compare their model weight updates to determine when convergence has occurred.
+
+To simulate realistic, real-world conditions, the training data can be distributed unevenly between the two nodes. It is partitioned using a Dirichlet distribution, which creates non-identical and unevenly distributed (non-IID) data across nodes. We can control this unevenness using a parameter alpha. Smaller values of alpha give progressively more uneven distributions. This means each node is exposed to a different distribution of clothing categories, reflecting the kind of data imbalance often seen in practical applications.
+
+|<img width="1372" height="771" alt="Cascaded DP Architecture Flowchart" src="https://github.com/user-attachments/files/30270308/voting_diagram.1.pdf" />|
+|:--:|
+|<b>Figure 1: Cascaded DP Architecture Flowchart for the Fashion-MNIST Swarm Learning Example</b>|
 
 The ML program is in `workspace/fashion-mnist/model` and is called `fashion-mnist_nonuniform.py`.
+See the [`results/`](./results) folder for accuracy and runtime benchmarks.
 
 **Stack:** TensorFlow · TensorFlow Privacy · HPE Swarm Learning
 
@@ -29,11 +38,14 @@ The cluster setup for this example uses only one host, as shown in the figure be
 fashion-mnist/
 ├── cert/
 ├── ml-context/
+│   ├── Dockerfile
+│   └── requirements.txt
 ├── model/
 │   └── fashion-mnist_nonuniform.py
 ├── results/
-│   ├── *.json
-│   └── *.log
+│   ├── Accuracy_Bar.png
+│   ├── Runtime_Bar.png
+│   └── results.md
 ├── tmp/
 │   ├── sl1/
 │   └── sl2/
@@ -469,7 +481,7 @@ Because the merge is weighted by data share rather than a simple headcount avera
 
 Once quorum is detected, every node recompiles its model with a standard, non-private optimizer (dropping the DP wrapper) and clears its cached Keras training/test/predict functions so the new optimizer takes effect immediately.
 
-Privacy accounting (epsilon) is computed only for the exact epochs in which DP was actively running (`dp_drop_epoch`, or the full `MAX_EPOCHS` if DP was never dropped). **Known limitation:** Stage 2 (post-drop) currently runs with zero noise, so this $\varepsilon$ does not cover the full training run. Treat Cascaded DP's reported $\varepsilon$ as a Stage-1-only figure until a Stage 2 noise floor is implemented.
+Privacy accounting (epsilon) is computed only for the exact epochs in which DP was actively running (`dp_drop_epoch`, or the full `MAX_EPOCHS` if DP was never dropped). **Known limitation:** Stage 2 (post-drop) currently runs with zero noise, so this $\varepsilon$ does not cover the full training run.
 
 ---
 
