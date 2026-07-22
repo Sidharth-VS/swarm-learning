@@ -13,7 +13,6 @@
 ## under the License.
 ############################################################################
 import os
-import glob
 import json
 import time
 import numpy as np
