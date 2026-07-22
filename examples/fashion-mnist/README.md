@@ -6,7 +6,7 @@ To protect data privacy, the training process uses Differential Privacy (DP). Th
 
 To simulate realistic, real-world conditions, the training data can be distributed unevenly between the two nodes. It is partitioned using a Dirichlet distribution, which creates non-identical and unevenly distributed (non-IID) data across nodes. We can control this unevenness using a parameter alpha. Smaller values of alpha give progressively more uneven distributions. This means each node is exposed to a different distribution of clothing categories, reflecting the kind of data imbalance often seen in practical applications.
 
-|<img width="1372" height="771" alt="Cascaded DP Architecture Flowchart" src="https://github.com/user-attachments/files/30270308/voting_diagram.1.pdf" />|
+|<img width="1055" height="1125" alt="Cascaded DP Architecture Flowchart" src="https://github.com/user-attachments/files/30270308/voting_diagram.1.pdf" />|
 |:--:|
 |<b>Figure 1: Cascaded DP Architecture Flowchart for the Fashion-MNIST Swarm Learning Example</b>|
 
