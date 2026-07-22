@@ -1,6 +1,6 @@
 # Fashion-MNIST: CascadedDP with Non-Uniform Partitioning
 
-This example trains a Fashion-MNIST classifier across a two-node HPE Swarm Learning setup using CascadedDP: training begins with Differential Privacy (DP) active, and DP is automatically dropped once convergence is detected via a decentralized weight parameter consensus protocol. Data is partitioned using a Dirichlet distribution to simulate non-IID heterogeneity. The model is a standard small CNN (matching the TF Privacy / Opacus canonical DP-SGD benchmark architecture for MNIST/Fashion-MNIST), not a plain MLP.
+This example trains a Fashion-MNIST classifier across a two ML node (both run on the VM/Physical machine) HPE Swarm Learning setup using CascadedDP: training begins with Differential Privacy (DP) active, and DP is automatically dropped once convergence is detected via a decentralized weight parameter consensus protocol. Data is partitioned using a Dirichlet distribution to simulate non-IID heterogeneity. The model is a standard small CNN (matching the TF Privacy / Opacus canonical DP-SGD benchmark architecture for MNIST/Fashion-MNIST), not a plain MLP.
 
 The ML program is in `workspace/fashion-mnist/model` and is called `fashion-mnist_nonuniform.py`.
 
@@ -477,7 +477,6 @@ Privacy accounting (epsilon) is computed only for the exact epochs in which DP w
 
 * **TensorFlow:** 2.7.0
 * **TensorFlow Privacy:** 0.7.3
-* **TensorFlow Probability:** 0.15.0
 * Adjust `DIRICHLET_ALPHA` to sweep heterogeneity levels across experiments. Lower values produce more skewed class distributions.
 
 
