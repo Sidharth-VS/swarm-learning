@@ -6,7 +6,7 @@ To protect data privacy, the training process uses Differential Privacy (DP). Th
 
 To simulate realistic, real-world conditions, the training data can be distributed unevenly between the two nodes. It is partitioned using a Dirichlet distribution, which creates non-identical and unevenly distributed (non-IID) data across nodes. We can control this unevenness using a parameter alpha. Smaller values of alpha give progressively more uneven distributions. This means each node is exposed to a different distribution of clothing categories, reflecting the kind of data imbalance often seen in practical applications.
 
-|<img width="1055" height="1125" alt="Cascaded DP Architecture Flowchart" src="https://github.com/user-attachments/files/30270308/voting_diagram.1.pdf" />|
+|<img width="1055" height="1125" alt="Cascaded DP Architecture Flowchart" src="https://github.com/user-attachments/assets/00cebdcc-2d3f-416a-af15-67eb87fa7ef5" />|
 |:--:|
 |<b>Figure 1: Cascaded DP Architecture Flowchart for the Fashion-MNIST Swarm Learning Example</b>|
 
@@ -22,10 +22,9 @@ This example shows the Swarm training of a Fashion-MNIST classifier using two Ma
 The cluster setup for this example uses only one host, as shown in the figure below:
 - host-1: 172.1.1.1
 
-|<img width="1372" height="771" alt="Fashion-MNIST-cluster-setup" src="https://github.com/user-attachments/assets/00cebdcc-2d3f-416a-af15-67eb87fa7ef5"/>|
+|<img width="1372" height="771" alt="Fashion-MNIST-cluster-setup" src="https://github.com/user-attachments/assets/52e11724-6b98-4ca7-9763-3b12f7edbcb1" />|
 |:--:|
 |<b>Figure 1: Cluster setup for the Cascaded DP Fashion MNIST example</b>|
-
 
 * This example uses one Swarm Network (SN) node. The name of the docker container representing this node is `sn1`. `sn1` is also the Sentinel Node. `sn1` runs on host 172.1.1.1.
 * Two Swarm Learning (SL) and two Machine Learning (ML) nodes are launched directly using `run-sl`. The names of the docker containers representing these nodes are `sl1` and `sl2`, with associated ML containers `ml1` and `ml2`. Both run on host 172.1.1.1.
